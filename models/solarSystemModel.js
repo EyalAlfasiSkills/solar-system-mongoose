@@ -1,9 +1,12 @@
 const mongoose = require("mongoose");
-const Schema = mogoose.Schema;
+const Schema = mongoose.Schema;
 
 const solarSystem = new Schema({
   starName: String,
-  planets: [{ type: Schema.Types.ObjectId, ref: "planet" }],
+  planets: {
+    type: [{ type: Schema.Types.ObjectId, ref: "planet" }],
+    default: [],
+  },
 });
 
 module.exports = mongoose.model("solarSystem", solarSystem);

@@ -1,10 +1,13 @@
-const mogoose = require("mongoose");
-const Schema = mogoose.Schema;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const visitor = new Schema({
-  name: string,
+  name: String,
   homePlanet: { type: Schema.Types.ObjectId, ref: "planet" },
-  visitedPlanets: [{ type: Schema.Types.ObjectId, ref: "planet" }],
+  visitedPlanets: {
+    type: [{ type: Schema.Types.ObjectId, ref: "planet" }],
+    default: [],
+  },
 });
 
-module.exports = mogoose.model("visitor", visitor);
+module.exports = mongoose.model("visitor", visitor);
