@@ -5,6 +5,7 @@ const router = express.Router();
 // const VisitorModel = require("../../models/VisitorModel");
 const {
   getSolarSystems,
+  getSolarSystemVisitors
   // addPlanetToSolarSystem,
 } = require("./solarSystems.controller");
 
@@ -40,6 +41,7 @@ const {
 // });
 
 router.get("/:systemId?", getSolarSystems);
+router.get("/:systemId?/visitors", getSolarSystemVisitors);
 
 // router.patch("/add/:systemId/:planetId", addPlanetToSolarSystem);
 

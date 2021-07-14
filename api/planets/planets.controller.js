@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const PlanetModel = require("../../models/PlanetModel");
 const VisitorModel = require("../../models/VisitorModel");
-const { query } = require("./planets.handler");
+const { query, getStarNameAndVisitors } = require("./planets.handler");
 const makeObjectId = mongoose.Types.ObjectId;
 
 async function getPlanets(req, res) {
@@ -19,6 +19,16 @@ async function getPlanetsByVisitorId(req, res) {
     const { visitorId } = req.params;
     const planets = await query({ visitorId });
     res.status(200).json(planets);
+  } catch (err) {
+    res.status(404).send(err);
+  }
+}
+
+async function getPlanetStarNameAndVisitors(req, res) {
+  try {
+    const { planetId } = req.params;
+    const data = await getStarNameAndVisitors(planetId);
+    res.status(200).json(data);
   } catch (err) {
     res.status(404).send(err);
   }
@@ -54,5 +64,6 @@ async function getPlanetsByVisitorId(req, res) {
 module.exports = {
   getPlanets,
   getPlanetsByVisitorId,
+  getPlanetStarNameAndVisitors,
   // visitPlanet,
 };
